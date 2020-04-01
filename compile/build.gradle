@@ -1,0 +1,49 @@
+plugins {
+    id 'java-gradle-plugin'
+    id 'com.gradle.plugin-publish' version '0.11.0'
+    id 'com.diffplug.gradle.spotless' version '3.27.2'
+}
+
+gradlePlugin {
+    plugins {
+        compilePlugin {
+            id = 'org.seasar.doma.compile'
+            displayName = 'Doma Compile Plugin'
+            description = 'Allow annotation processors to read Doma resources at compile-time'
+            implementationClass = 'org.seasar.doma.gradle.CompilePlugin'
+        }
+    }
+}
+
+pluginBundle {
+    website = 'https://github.com/domaframework/doma-compile-plugin'
+    vcsUrl = 'https://github.com/domaframework/doma-compile-plugin.git'
+    tags = ['doma', 'compile', 'annotation-processing']
+}
+
+group = 'org.seasar.doma'
+version = '0.0.3'
+
+spotless {
+    java {
+        googleJavaFormat('1.7')
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+test {
+    useJUnitPlatform()
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.1'
+}

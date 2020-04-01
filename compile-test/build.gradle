@@ -1,0 +1,31 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        maven {url 'https://oss.sonatype.org/content/repositories/snapshots/'}
+    }
+    dependencies {
+        classpath "org.seasar.doma:compile"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.seasar.doma.compile'
+
+ext.domaVersion = '2.28.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    maven {url 'https://oss.sonatype.org/content/repositories/snapshots/'}
+}
+
+dependencies {
+    annotationProcessor "org.seasar.doma:doma:$domaVersion"
+    implementation "org.seasar.doma:doma:$domaVersion"
+}
