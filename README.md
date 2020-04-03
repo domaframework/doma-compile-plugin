@@ -18,20 +18,42 @@ The plugin is equivalent to the following gradle script:
 ```groovy
 def domaResources = ['doma.compile.config', 'META-INF/**/*.sql', 'META-INF/**/*.script']
 
-task syncDomaResources(type: Sync) {
+task syncDomaResourcesJava(type: Sync) {
     from sourceSets.main.resources.srcDirs
     into compileJava.destinationDir
     include domaResources
 }
 
 compileJava {
-    dependsOn syncDomaResources
+    dependsOn syncDomaResourcesJava
 }
 
 processResources {
     exclude domaResources
 }
+
+task syncDomaResourcesKotlin(type: Sync) {
+    from sourceSets.main.resources.srcDirs
+    into kotlinJava.destinationDir
+    include domaResources
+}
+
+compileKotlin {
+    dependsOn syncDomaResourcesKotlin
+}
+
+kapt {
+    arguments {
+        arg("doma.resources.dir", compileKotlin.destinationDir)
+    }
+}
 ```
+
+Example build.gradle
+--------------------
+
+- Java: https://github.com/domaframework/simple-examples/blob/master/build.gradle
+- Kotlin: https://github.com/domaframework/kotlin-sample/blob/master/build.gradle
 
 License
 -------
