@@ -1,0 +1,3 @@
+rootProject.name = 'compile-kotlin-test'
+
+includeBuild '../compile'

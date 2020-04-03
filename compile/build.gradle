@@ -1,4 +1,5 @@
 plugins {
+    id 'groovy'
     id 'java-gradle-plugin'
     id 'com.gradle.plugin-publish' version '0.11.0'
     id 'com.diffplug.gradle.spotless' version '3.27.2'
@@ -10,7 +11,7 @@ gradlePlugin {
             id = 'org.seasar.doma.compile'
             displayName = 'Doma Compile Plugin'
             description = 'Allows annotation processors to read Doma resources at compile-time'
-            implementationClass = 'org.seasar.doma.gradle.CompilePlugin'
+            implementationClass = 'org.seasar.doma.gradle.compile.CompilePlugin'
         }
     }
 }
@@ -20,9 +21,6 @@ pluginBundle {
     vcsUrl = 'https://github.com/domaframework/doma-compile-plugin.git'
     tags = ['doma', 'compile', 'annotation-processing']
 }
-
-group = 'org.seasar.doma'
-version = '0.0.3'
 
 spotless {
     java {
@@ -47,3 +45,5 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.1'
 }
+
+groovydoc.enabled = false

@@ -1,0 +1,3 @@
+rootProject.name = 'compile-java-test'
+
+includeBuild '../compile'

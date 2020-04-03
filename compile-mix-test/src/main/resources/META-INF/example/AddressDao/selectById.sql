@@ -1,0 +1,1 @@
+select * from address where id = /*id*/0
