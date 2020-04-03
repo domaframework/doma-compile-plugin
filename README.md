@@ -4,6 +4,8 @@ Doma Compile Plugin
 Doma compile plugin is a gradle plugin.  
 It allows annotation processors to read Doma resources at compile-time.
 
+The plugin supports Java and Kotlin.
+
 How to use
 ----------
 
@@ -34,7 +36,7 @@ processResources {
 
 task syncDomaResourcesKotlin(type: Sync) {
     from sourceSets.main.resources.srcDirs
-    into kotlinJava.destinationDir
+    into compileKotlin.destinationDir
     include domaResources
 }
 
@@ -44,7 +46,7 @@ compileKotlin {
 
 kapt {
     arguments {
-        arg("doma.resources.dir", compileKotlin.destinationDir)
+        arg('doma.resources.dir', compileKotlin.destinationDir)
     }
 }
 ```
