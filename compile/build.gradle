@@ -22,6 +22,17 @@ pluginBundle {
     tags = ['doma', 'compile', 'annotation-processing']
 }
 
+sourceSets {
+    main {
+        java {
+            srcDirs = []
+        }
+        groovy {
+            srcDirs = ['src/main/groovy', 'src/main/java']
+        }
+    }
+}
+
 spotless {
     java {
         googleJavaFormat('1.7')
