@@ -16,10 +16,10 @@ public class ConfigureJava {
         tasks.named(sourceSet.getCompileJavaTaskName(), JavaCompile.class);
     TaskProvider<ProcessResources> processResources =
         tasks.named(sourceSet.getProcessResourcesTaskName(), ProcessResources.class);
-    TaskProvider<SyncResources> syncResources =
-        tasks.register(SyncResources.NAME + "Java", SyncResources.class, sourceSet, javaCompile);
+    TaskProvider<CopyResources> copyResources =
+        tasks.register(CopyResources.NAME + "Java", CopyResources.class, sourceSet, javaCompile);
 
-    javaCompile.configure(task -> task.dependsOn(syncResources));
-    processResources.configure(task -> task.exclude(SyncResources.DOMA_RESOURCES));
+    javaCompile.configure(task -> task.dependsOn(copyResources));
+    processResources.configure(task -> task.exclude(CopyResources.DOMA_RESOURCES));
   }
 }

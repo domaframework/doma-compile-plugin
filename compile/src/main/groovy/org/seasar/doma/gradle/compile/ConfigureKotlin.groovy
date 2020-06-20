@@ -13,9 +13,9 @@ class ConfigureKotlin {
             kapt.arguments {
                 arg('doma.resources.dir', compileKotlin.get().destinationDir)
             }
-            def syncResources = tasks.register(SyncResources.NAME + "Kotlin", SyncResources.class, sourceSet, compileKotlin)
+            def copyResources = tasks.register(CopyResources.NAME + "Kotlin", CopyResources.class, sourceSet, compileKotlin)
             compileKotlin.configure {
-                dependsOn syncResources
+                dependsOn copyResources
             }
         }
     }
