@@ -20,28 +20,28 @@ The plugin is equivalent to the following gradle script:
 ```groovy
 def domaResources = ['doma.compile.config', 'META-INF/**/*.sql', 'META-INF/**/*.script']
 
-task syncDomaResourcesJava(type: Sync) {
+task copyDomaResourcesJava(type: Copy) {
     from sourceSets.main.resources.srcDirs
     into compileJava.destinationDir
     include domaResources
 }
 
 compileJava {
-    dependsOn syncDomaResourcesJava
+    dependsOn copyDomaResourcesJava
 }
 
 processResources {
     exclude domaResources
 }
 
-task syncDomaResourcesKotlin(type: Sync) {
+task copyDomaResourcesKotlin(type: Copy) {
     from sourceSets.main.resources.srcDirs
     into compileKotlin.destinationDir
     include domaResources
 }
 
 compileKotlin {
-    dependsOn syncDomaResourcesKotlin
+    dependsOn copyDomaResourcesKotlin
 }
 
 kapt {
