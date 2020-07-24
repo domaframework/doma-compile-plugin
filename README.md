@@ -1,6 +1,8 @@
 Doma Compile Plugin
 ===================
 
+![Java CI with Gradle](https://github.com/domaframework/doma-compile-plugin/workflows/Java%20CI%20with%20Gradle/badge.svg)
+
 Doma compile plugin is a gradle plugin.  
 It allows annotation processors to read Doma resources at compile-time.
 
