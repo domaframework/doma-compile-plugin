@@ -6,8 +6,6 @@ import java.util.List;
 import javax.inject.Inject;
 import org.gradle.api.tasks.Copy;
 import org.gradle.api.tasks.SourceSet;
-import org.gradle.api.tasks.TaskProvider;
-import org.gradle.api.tasks.compile.AbstractCompile;
 
 public class CopyResources extends Copy {
 
@@ -18,9 +16,9 @@ public class CopyResources extends Copy {
           Arrays.asList("doma.compile.config", "META-INF/**/*.sql", "META-INF/**/*.script"));
 
   @Inject
-  public CopyResources(SourceSet sourceSet, TaskProvider<AbstractCompile> compile) {
+  public CopyResources(SourceSet sourceSet, Object destinationDirectory) {
     from(sourceSet.getResources().getSourceDirectories());
-    into(compile.get().getDestinationDir());
+    into(destinationDirectory);
     include(DOMA_RESOURCES);
   }
 }
