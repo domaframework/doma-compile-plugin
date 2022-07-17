@@ -12,14 +12,18 @@ public class ConfigureJava {
   public static void configure(Project project, SourceSet sourceSet) {
     TaskContainer tasks = project.getTasks();
 
-    TaskProvider<JavaCompile> javaCompile =
-        tasks.named(sourceSet.getCompileJavaTaskName(), JavaCompile.class);
+    JavaCompile javaCompile =
+        tasks.named(sourceSet.getCompileJavaTaskName(), JavaCompile.class).get();
     TaskProvider<ProcessResources> processResources =
         tasks.named(sourceSet.getProcessResourcesTaskName(), ProcessResources.class);
     TaskProvider<CopyResources> copyResources =
-        tasks.register(CopyResources.NAME + "Java", CopyResources.class, sourceSet, javaCompile);
+        tasks.register(
+            CopyResources.NAME + "Java",
+            CopyResources.class,
+            sourceSet,
+            javaCompile.getDestinationDir());
 
-    javaCompile.configure(task -> task.dependsOn(copyResources));
+    javaCompile.dependsOn(copyResources);
     processResources.configure(task -> task.exclude(CopyResources.DOMA_RESOURCES));
   }
 }
