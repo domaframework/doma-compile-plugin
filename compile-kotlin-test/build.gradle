@@ -5,12 +5,12 @@ buildscript {
         maven {url 'https://oss.sonatype.org/content/repositories/snapshots/'}
     }
     dependencies {
-        classpath "org.seasar.doma:compile"
+        classpath "org.domaframework.doma:compile"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10"
     }
 }
 
-apply plugin: 'org.seasar.doma.compile'
+apply plugin: 'org.domaframework.doma.compile'
 apply plugin: 'kotlin'
 apply plugin: 'kotlin-kapt'
 

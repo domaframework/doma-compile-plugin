@@ -5,12 +5,12 @@ buildscript {
         maven {url 'https://oss.sonatype.org/content/repositories/snapshots/'}
     }
     dependencies {
-        classpath "org.seasar.doma:compile"
+        classpath "org.domaframework.doma:compile"
     }
 }
 
 apply plugin: 'java'
-apply plugin: 'org.seasar.doma.compile'
+apply plugin: 'org.domaframework.doma.compile'
 
 ext.domaVersion = '2.29.0'
 
