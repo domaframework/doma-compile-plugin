@@ -8,7 +8,7 @@ plugins {
 gradlePlugin {
     plugins {
         compilePlugin {
-            id = 'org.seasar.doma.compile'
+            id = 'org.domaframework.doma.compile'
             displayName = 'Doma Compile Plugin'
             description = 'Allows annotation processors to read Doma resources at compile-time'
             implementationClass = 'org.seasar.doma.gradle.compile.CompilePlugin'
