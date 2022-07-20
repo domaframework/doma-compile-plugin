@@ -13,7 +13,7 @@ The plugin supports Java and Kotlin.
 How to use
 ----------
 
-See [Gradle Plugin Portal](https://plugins.gradle.org/plugin/org.seasar.doma.compile).
+See [Gradle Plugin Portal](https://plugins.gradle.org/plugin/org.domaframework.doma.compile).
 
 What does the plugin do ?
 -------------------------
