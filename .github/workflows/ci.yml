@@ -20,10 +20,6 @@ jobs:
           distribution: 'zulu'
           java-version: 21
 
-      - name: Grant execute permission for compile/gradlew
-        working-directory: ./compile
-        run: chmod +x gradlew
-
       - name: Grant execute permission for compile-java-test/gradlew
         working-directory: ./compile-java-test
         run: chmod +x gradlew
@@ -37,7 +33,6 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build plugin
-        working-directory: ./compile
         run: ./gradlew build
 
       - name: Test plugin against Java
