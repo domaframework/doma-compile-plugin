@@ -9,14 +9,16 @@ buildscript {
     }
 }
 
-apply plugin: 'java'
+plugins {
+    id 'java'
+}
+
 apply plugin: 'org.domaframework.doma.compile'
 
-ext.domaVersion = '2.29.0'
+ext.domaVersion = '3.0.0'
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    toolchain.languageVersion.set(JavaLanguageVersion.of( 17))
 }
 
 test {
@@ -30,8 +32,8 @@ repositories {
 }
 
 dependencies {
-    annotationProcessor "org.seasar.doma:doma:$domaVersion"
-    implementation "org.seasar.doma:doma:$domaVersion"
+    annotationProcessor "org.seasar.doma:doma-processor:$domaVersion"
+    implementation "org.seasar.doma:doma-core:$domaVersion"
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.11.1'
 }

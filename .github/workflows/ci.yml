@@ -14,15 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up JDK 8
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: 8
-
-      - name: Grant execute permission for compile/gradlew
-        working-directory: ./compile
-        run: chmod +x gradlew
+          java-version: 21
 
       - name: Grant execute permission for compile-java-test/gradlew
         working-directory: ./compile-java-test
@@ -37,7 +33,6 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build plugin
-        working-directory: ./compile
         run: ./gradlew build
 
       - name: Test plugin against Java
@@ -54,7 +49,6 @@ jobs:
 
       - name: Set version
         id: set-version
-        working-directory: ./compile
         run: ./gradlew properties | grep "^version:" | awk '{print $2}' | { read v; echo "::set-output name=version::$v"; }
 
       - name: Print version
@@ -62,5 +56,4 @@ jobs:
 
       - name: Publish plugin
         if: github.event_name == 'push' && endsWith(steps.set-version.outputs.version, 'SNAPSHOT') == false
-        working-directory: ./compile
         run: ./gradlew publishPlugins -Pgradle.publish.key=${{ secrets.GRADLE_PUBLISH_KEY }} -Pgradle.publish.secret=${{ secrets.GRADLE_PUBLISH_SECRET }}
