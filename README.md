@@ -54,8 +54,8 @@ kapt {
 }
 ```
 
-Example build.gradle
---------------------
+Example build.gradle.kts
+------------------------
 
 - Java: https://github.com/domaframework/simple-examples/blob/master/build.gradle.kts
 - Kotlin: https://github.com/domaframework/kotlin-sample/blob/master/build.gradle.kts
