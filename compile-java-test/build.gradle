@@ -15,7 +15,7 @@ plugins {
 
 apply plugin: 'org.domaframework.doma.compile'
 
-ext.domaVersion = '3.0.0'
+ext.domaVersion = '3.0.1'
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of( 17))
