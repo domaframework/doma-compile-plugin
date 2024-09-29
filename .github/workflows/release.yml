@@ -27,7 +27,7 @@ jobs:
           script: |
             const list = await github.rest.repos.listReleases({
               owner: "domaframework",
-              repo: "doma-codegen-plugin",
+              repo: "doma-compile-plugin",
             });
             console.log(list)
             let version = list.data[0].name
