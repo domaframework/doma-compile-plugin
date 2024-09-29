@@ -65,10 +65,10 @@ Major versions
 
 ### Status and Repository
 
-| Version                 | Status          | Repository                                            | Branch |
-|-------------------------|-----------------|-------------------------------------------------------|--------|
-| [Doma Compile Plugin 2] | limited-support | https://github.com/domaframework/doma-compile-plugin/ | 2.x    |
-| [Doma Compile Plugin 3] | stable          | https://github.com/domaframework/doma-compile-plugin/ | master |
+| Version               | Status          | Repository                                                                                 | Branch |
+|-----------------------|-----------------|--------------------------------------------------------------------------------------------|--------|
+| Doma Compile Plugin 2 | limited-support | [domaframework/doma-compile-plugin](https://github.com/domaframework/doma-compile-plugin/) | 2.x    |
+| Doma Compile Plugin 3 | stable          | [domaframework/doma-compile-plugin](https://github.com/domaframework/doma-compile-plugin/) | master |
 
 ### Compatibility matrix
 
