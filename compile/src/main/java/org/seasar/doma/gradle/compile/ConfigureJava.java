@@ -21,7 +21,7 @@ public class ConfigureJava {
             CopyResources.NAME + "Java",
             CopyResources.class,
             sourceSet,
-            javaCompile.getDestinationDir());
+            javaCompile.getDestinationDirectory());
 
     javaCompile.dependsOn(copyResources);
     processResources.configure(task -> task.exclude(CopyResources.DOMA_RESOURCES));
