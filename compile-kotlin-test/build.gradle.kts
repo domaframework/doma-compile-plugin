@@ -18,7 +18,7 @@ plugins {
     id("org.jetbrains.kotlin.kapt") version "2.1.0"
 }
 
-val domaVersion = "3.2.0"
+val domaVersion = "3.3.0"
 
 kapt {
     includeCompileClasspath = false
