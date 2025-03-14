@@ -16,7 +16,7 @@ plugins {
     id("org.domaframework.doma.compile")
 }
 
-val domaVersion = "3.5.1"
+val domaVersion = "3.6.0"
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(17))
