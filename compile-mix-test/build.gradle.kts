@@ -46,6 +46,6 @@ dependencies {
     kapt("org.seasar.doma:doma-processor:$domaVersion")
     implementation("org.seasar.doma:doma-core:$domaVersion")
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.4")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.11.4")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.12.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.12.2")
 }
