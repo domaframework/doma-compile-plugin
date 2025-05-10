@@ -1,55 +1,38 @@
 Doma Compile Plugin
 ===================
 
-Doma compile plugin is a gradle plugin.  
-It allows annotation processors to read Doma resources at compile-time.
+The Doma Compile Plugin is a Gradle plugin that allows annotation processors to read Doma resources at compile-time.
 
-The plugin supports Java and Kotlin.
+The plugin supports both Java and Kotlin.
 
 [![Java CI with Gradle](https://github.com/domaframework/doma-compile-plugin/workflows/Java%20CI%20with%20Gradle/badge.svg)](https://github.com/domaframework/doma-compile-plugin/actions?query=workflow%3A%22Java+CI+with+Gradle%22)
-[![project chat](https://img.shields.io/badge/zulip-join_chat-green.svg)](https://domaframework.zulipchat.com)
+[![Project Chat](https://img.shields.io/badge/zulip-join_chat-green.svg)](https://domaframework.zulipchat.com)
 [![Twitter](https://img.shields.io/badge/twitter-@domaframework-blue.svg?style=flat)](https://twitter.com/domaframework)
 
-How to use
+How to Use
 ----------
 
-See [Gradle Plugin Portal](https://plugins.gradle.org/plugin/org.domaframework.doma.compile).
+See the [Gradle Plugin Portal](https://plugins.gradle.org/plugin/org.domaframework.doma.compile).
 
-What does the plugin do ?
+What Does the Plugin Do?
 -------------------------
 
-The plugin is equivalent to the following gradle script:
+The plugin is equivalent to the following Gradle Kotlin DSL script:
 
-```groovy
-def domaResources = ['doma.compile.config', 'META-INF/**/*.sql', 'META-INF/**/*.script']
-
-task copyDomaResourcesJava(type: Copy) {
-    from sourceSets.main.resources.srcDirs
-    into compileJava.destinationDir
-    include domaResources
-}
-
-compileJava {
-    dependsOn copyDomaResourcesJava
-}
-
-processResources {
-    exclude domaResources
-}
-
-task copyDomaResourcesKotlin(type: Copy) {
-    from sourceSets.main.resources.srcDirs
-    into compileKotlin.destinationDir
-    include domaResources
-}
-
-compileKotlin {
-    dependsOn copyDomaResourcesKotlin
+```kotlin
+tasks {
+    compileJava {
+        val resourceDirs = sourceSets.getByName("main").resources.srcDirs
+        options.sourcepath = files(resourceDirs)
+        options.compilerArgs.add("-parameters")
+    }
 }
 
 kapt {
-    arguments {
-        arg('doma.resources.dir', compileKotlin.destinationDir)
+    javacOptions {
+        val resourceDirs = sourceSets.getByName("main").resources.srcDirs
+        option("--source-path", resourceDirs.join(File.pathSeparator))
+        option("-parameters")      
     }
 }
 ```
@@ -60,28 +43,31 @@ Example build.gradle.kts
 - Java: https://github.com/domaframework/simple-examples/blob/master/build.gradle.kts
 - Kotlin: https://github.com/domaframework/kotlin-sample/blob/master/build.gradle.kts
 
-Major versions
+Version Information
 ---------------------
 
 ### Status and Repository
 
-| Version               | Status          | Repository                                                                                 | Branch |
-|-----------------------|-----------------|--------------------------------------------------------------------------------------------|--------|
-| Doma Compile Plugin 2 | limited-support | [domaframework/doma-compile-plugin](https://github.com/domaframework/doma-compile-plugin/) | 2.x    |
-| Doma Compile Plugin 3 | stable          | [domaframework/doma-compile-plugin](https://github.com/domaframework/doma-compile-plugin/) | master |
+| Version               | Status           | Repository                                                                                 | Branch |
+|-----------------------|------------------|--------------------------------------------------------------------------------------------|--------|
+| Doma Compile Plugin 2 | Limited Support  | [domaframework/doma-compile-plugin](https://github.com/domaframework/doma-compile-plugin/) | 2.x    |
+| Doma Compile Plugin 3 | Limited Support  | [domaframework/doma-compile-plugin](https://github.com/domaframework/doma-compile-plugin/) | 3.x    |
+| Doma Compile Plugin 4 | Stable           | [domaframework/doma-compile-plugin](https://github.com/domaframework/doma-compile-plugin/) | master |
 
-### Compatibility matrix
+### Compatibility Matrix
 
-The supported versions of Doma:
+Doma Version Compatibility:
 
-|                       | Doma 2 | Doma 3 |
-|-----------------------|--------|--------|
-| Doma Compile Plugin 2 | v      |        |
-| Doma Compile Plugin 3 |        | v      |
+|                       | Doma 2 | Doma 3.0 - 3.7 | Doma 3.8 or later |
+|-----------------------|--------|----------------|-------------------|
+| Doma Compile Plugin 2 | ✓      |                |                   |
+| Doma Compile Plugin 3 |        | ✓              |                   |
+| Doma Compile Plugin 4 |        |                | ✓                 |
 
-The minimum supported versions of Java:
+Java Version Requirements:
 
-|                       | Java 8 | Java 17 |
-|-----------------------|--------|---------|
-| Doma Compile Plugin 2 | v      |         |
-| Doma Compile Plugin 3 |        | v       |
+|                       | Java 8　or later | Java 17 or later |
+|-----------------------|------------------|-------------------|
+| Doma Compile Plugin 2 | ✓                |                   |
+| Doma Compile Plugin 3 |                  | ✓                 |
+| Doma Compile Plugin 4 |                  | ✓                 |
