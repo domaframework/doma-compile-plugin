@@ -35,18 +35,17 @@ jobs:
       - name: Build plugin
         run: ./gradlew build
 
-# TODO
-#      - name: Test plugin against Java
-#        working-directory: ./compile-java-test
-#        run: ./gradlew build
-#
-#      - name: Test plugin against Kotlin
-#        working-directory: ./compile-kotlin-test
-#        run: ./gradlew build
-#
-#      - name: Test plugin against a mix of Java and Kotlin
-#        working-directory: ./compile-mix-test
-#        run: ./gradlew build
+      - name: Test plugin against Java
+        working-directory: ./compile-java-test
+        run: ./gradlew build
+
+      - name: Test plugin against Kotlin
+        working-directory: ./compile-kotlin-test
+        run: ./gradlew build
+
+      - name: Test plugin against a mix of Java and Kotlin
+        working-directory: ./compile-mix-test
+        run: ./gradlew build
 
       - name: Set version
         id: set-version
