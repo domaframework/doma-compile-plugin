@@ -40,7 +40,7 @@ dependencies {
     annotationProcessor("org.seasar.doma:doma-processor:$domaVersion")
     implementation("org.seasar.doma:doma-core:$domaVersion")
     // Use JUnit BOM for version management
-    testImplementation(platform("org.junit:junit-bom:5.12.2"))
+    testImplementation(platform("org.junit:junit-bom:5.13.0"))
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
