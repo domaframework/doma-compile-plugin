@@ -1,16 +1,3 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        mavenLocal()
-        maven {
-            url = uri("https://oss.sonatype.org/content/repositories/snapshots/")
-        }
-    }
-    dependencies {
-        classpath("org.domaframework.doma:compile")
-    }
-}
-
 plugins {
     id("java")
     id("org.domaframework.doma.compile")
@@ -30,10 +17,6 @@ tasks {
 
 repositories {
     mavenCentral()
-    mavenLocal()
-    maven {
-        url = uri("https://oss.sonatype.org/content/repositories/snapshots/")
-    }
 }
 
 dependencies {

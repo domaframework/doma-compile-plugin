@@ -20,31 +20,15 @@ jobs:
           distribution: 'zulu'
           java-version: 21
 
-      - name: Grant execute permission for compile-java-test/gradlew
-        working-directory: ./compile-java-test
+      - name: Grant execute permission for compile/gradlew
+        working-directory: ./compile
         run: chmod +x gradlew
 
-      - name: Grant execute permission for compile-kotlin-test/gradlew
-        working-directory: ./compile-kotlin-test
-        run: chmod +x gradlew
-
-      - name: Grant execute permission for compile-mix-test/gradlew
-        working-directory: ./compile-mix-test
-        run: chmod +x gradlew
-
-      - name: Build plugin
+      - name: Build compile-plugin
+        working-directory: ./compile
         run: ./gradlew build
 
-      - name: Test plugin against Java
-        working-directory: ./compile-java-test
-        run: ./gradlew build
-
-      - name: Test plugin against Kotlin
-        working-directory: ./compile-kotlin-test
-        run: ./gradlew build
-
-      - name: Test plugin against a mix of Java and Kotlin
-        working-directory: ./compile-mix-test
+      - name: Test
         run: ./gradlew build
 
       - name: Set version
@@ -55,5 +39,6 @@ jobs:
         run: echo ${{ steps.set-version.outputs.version }}
 
       - name: Publish plugin
+        working-directory: ./compile
         if: github.event_name == 'push' && endsWith(steps.set-version.outputs.version, 'SNAPSHOT') == false
         run: ./gradlew publishPlugins -Pgradle.publish.key=${{ secrets.GRADLE_PUBLISH_KEY }} -Pgradle.publish.secret=${{ secrets.GRADLE_PUBLISH_SECRET }}
