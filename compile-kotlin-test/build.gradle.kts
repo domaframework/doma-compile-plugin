@@ -14,10 +14,6 @@ java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(libs.versions.java.get().toInt()))
 }
 
-repositories {
-    mavenCentral()
-}
-
 tasks {
     test {
         useJUnitPlatform()

@@ -6,9 +6,9 @@ import org.seasar.doma.Select;
 
 @Dao
 public interface EmployeeDao {
-    @Select
-    Employee selectById(Integer id);
+  @Select
+  Employee selectById(Integer id);
 
-    @Script
-    void create();
+  @Script
+  void create();
 }

@@ -14,10 +14,6 @@ tasks {
     }
 }
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     annotationProcessor(libs.doma.processor)
     implementation(libs.doma.core)

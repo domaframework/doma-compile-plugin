@@ -5,7 +5,6 @@ import org.seasar.doma.Id;
 
 @Entity
 public class Employee {
-    @Id
-    public Integer id;
-    public String name;
+  @Id public Integer id;
+  public String name;
 }

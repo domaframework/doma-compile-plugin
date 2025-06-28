@@ -20,10 +20,6 @@ tasks {
     }
 }
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     kapt(libs.doma.processor)
     implementation(libs.doma.core)
