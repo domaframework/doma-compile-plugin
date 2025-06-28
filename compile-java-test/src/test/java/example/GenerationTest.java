@@ -9,6 +9,6 @@ public class GenerationTest {
   @Test
   public void test() {
     assertNotNull(_Employee.class);
-    assertNotNull(EmployeeDao.class);
+    assertNotNull(EmployeeDaoImpl.class);
   }
 }

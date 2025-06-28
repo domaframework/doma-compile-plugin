@@ -10,7 +10,7 @@ public class GenerationTest {
   public void test() {
     assertNotNull(_Address.class);
     assertNotNull(_Employee.class);
-    assertNotNull(AddressDao.class);
-    assertNotNull(EmployeeDao.class);
+    assertNotNull(AddressDaoImpl.class);
+    assertNotNull(EmployeeDaoImpl.class);
   }
 }
