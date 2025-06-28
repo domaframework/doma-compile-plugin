@@ -3,15 +3,6 @@ plugins {
     id("java-gradle-plugin")
     alias(libs.plugins.gradle.plugin.publish)
     alias(libs.plugins.spotless)
-    alias(libs.plugins.release)
-}
-
-configure<net.researchgate.release.ReleaseExtension> {
-    newVersionCommitMessage.set("[Gradle Release Plugin] - [skip ci] new version commit: ")
-    tagTemplate.set("v\$version")
-    git {
-        requireBranch.set("master")
-    }
 }
 
 gradlePlugin {
