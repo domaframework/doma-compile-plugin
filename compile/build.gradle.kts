@@ -1,8 +1,17 @@
 plugins {
     id("groovy")
     id("java-gradle-plugin")
-    id("com.gradle.plugin-publish") version "1.3.1"
-    id("com.diffplug.spotless") version "7.0.4"
+    alias(libs.plugins.gradle.plugin.publish)
+    alias(libs.plugins.spotless)
+    alias(libs.plugins.release)
+}
+
+configure<net.researchgate.release.ReleaseExtension> {
+    newVersionCommitMessage.set("[Gradle Release Plugin] - [skip ci] new version commit: ")
+    tagTemplate.set("v\$version")
+    git {
+        requireBranch.set("master")
+    }
 }
 
 gradlePlugin {
@@ -32,12 +41,12 @@ sourceSets {
 
 spotless {
     java {
-        googleJavaFormat("1.23.0")
+        googleJavaFormat(libs.versions.google.java.format.get())
     }
 }
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(libs.versions.java.get().toInt()))
 }
 
 repositories {
@@ -46,10 +55,10 @@ repositories {
 
 dependencies {
     // Use JUnit BOM for version management
-    testImplementation(platform("org.junit:junit-bom:5.13.2"))
-    testImplementation("org.junit.jupiter:junit-jupiter-api")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testImplementation(platform(libs.junit.bom))
+    testImplementation(libs.junit.jupiter.api)
+    testRuntimeOnly(libs.junit.jupiter.engine)
+    testRuntimeOnly(libs.junit.platform.launcher)
 }
 
 tasks {

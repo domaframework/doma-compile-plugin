@@ -1,31 +1,17 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        mavenLocal()
-        maven {
-            url = uri("https://oss.sonatype.org/content/repositories/snapshots/")
-        }
-    }
-    dependencies {
-        classpath("org.domaframework.doma:compile")
-    }
-}
-
 plugins {
-    id("java")
+    java
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.kapt)
     id("org.domaframework.doma.compile")
-    id("org.jetbrains.kotlin.jvm") version "2.2.0"
-    id("org.jetbrains.kotlin.kapt") version "2.2.0"
 }
 
-val domaVersion = "3.9.1"
 
 kapt {
     includeCompileClasspath = false
 }
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of( 17))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(libs.versions.java.get().toInt()))
 }
 
 tasks {
@@ -34,21 +20,13 @@ tasks {
     }
 }
 
-repositories {
-    mavenCentral()
-    mavenLocal()
-    maven {
-        url = uri("https://oss.sonatype.org/content/repositories/snapshots/")
-    }
-}
-
 dependencies {
-    kapt("org.seasar.doma:doma-processor:$domaVersion")
-    implementation("org.seasar.doma:doma-core:$domaVersion")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib")
+    kapt(libs.doma.processor)
+    implementation(libs.doma.core)
+    implementation(libs.kotlin.stdlib)
     // Use JUnit BOM for version management
-    testImplementation(platform("org.junit:junit-bom:5.13.2"))
-    testImplementation("org.junit.jupiter:junit-jupiter-api")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testImplementation(platform(libs.junit.bom))
+    testImplementation(libs.junit.jupiter.api)
+    testRuntimeOnly(libs.junit.jupiter.engine)
+    testRuntimeOnly(libs.junit.platform.launcher)
 }

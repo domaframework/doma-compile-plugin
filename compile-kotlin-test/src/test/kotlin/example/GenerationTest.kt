@@ -7,6 +7,6 @@ class GenerationTest {
     @Test
     fun test() {
         assertNotNull(_Employee::class.java)
-        assertNotNull(EmployeeDao::class.java)
+        assertNotNull(EmployeeDaoImpl::class.java)
     }
 }

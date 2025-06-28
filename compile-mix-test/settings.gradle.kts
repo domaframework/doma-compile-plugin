@@ -1,5 +1,9 @@
 rootProject.name = "compile-mix-test"
 
-pluginManagement {
-    includeBuild("../compile")
+dependencyResolutionManagement {
+    versionCatalogs {
+        create("libs") {
+            from(files("../gradle/libs.versions.toml"))
+        }
+    }
 }

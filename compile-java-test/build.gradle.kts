@@ -1,25 +1,11 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        mavenLocal()
-        maven {
-            url = uri("https://oss.sonatype.org/content/repositories/snapshots/")
-        }
-    }
-    dependencies {
-        classpath("org.domaframework.doma:compile")
-    }
-}
-
 plugins {
-    id("java")
+    java
     id("org.domaframework.doma.compile")
 }
 
-val domaVersion = "3.9.1"
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(libs.versions.java.get().toInt()))
 }
 
 tasks {
@@ -28,20 +14,12 @@ tasks {
     }
 }
 
-repositories {
-    mavenCentral()
-    mavenLocal()
-    maven {
-        url = uri("https://oss.sonatype.org/content/repositories/snapshots/")
-    }
-}
-
 dependencies {
-    annotationProcessor("org.seasar.doma:doma-processor:$domaVersion")
-    implementation("org.seasar.doma:doma-core:$domaVersion")
+    annotationProcessor(libs.doma.processor)
+    implementation(libs.doma.core)
     // Use JUnit BOM for version management
-    testImplementation(platform("org.junit:junit-bom:5.13.2"))
-    testImplementation("org.junit.jupiter:junit-jupiter-api")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testImplementation(platform(libs.junit.bom))
+    testImplementation(libs.junit.jupiter.api)
+    testRuntimeOnly(libs.junit.jupiter.engine)
+    testRuntimeOnly(libs.junit.platform.launcher)
 }

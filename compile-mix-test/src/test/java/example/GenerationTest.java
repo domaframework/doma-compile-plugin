@@ -1,8 +1,8 @@
 package example;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import org.junit.jupiter.api.Test;
 
 public class GenerationTest {
 
@@ -10,7 +10,7 @@ public class GenerationTest {
   public void test() {
     assertNotNull(_Address.class);
     assertNotNull(_Employee.class);
-    assertNotNull(AddressDao.class);
-    assertNotNull(EmployeeDao.class);
+    assertNotNull(AddressDaoImpl.class);
+    assertNotNull(EmployeeDaoImpl.class);
   }
 }

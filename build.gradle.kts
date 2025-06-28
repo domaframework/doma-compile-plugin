@@ -1,21 +1,20 @@
 plugins {
     java
-    id("net.researchgate.release") version "3.1.0"
+    alias(libs.plugins.spotless)
 }
 
-configure<net.researchgate.release.ReleaseExtension> {
-    newVersionCommitMessage.set("[Gradle Release Plugin] - [skip ci] new version commit: ")
-    tagTemplate.set("v\$version")
-    git {
-        requireBranch.set("master")
-    }
-}
+val catalog = libs
 
 allprojects {
-    apply(plugin = "java")
-    tasks {
-        test {
-            useJUnitPlatform()
+    apply(plugin = catalog.plugins.spotless.get().pluginId)
+
+    spotless {
+        java {
+            googleJavaFormat(libs.versions.google.java.format.get())
         }
+    }
+
+    repositories {
+        mavenCentral()
     }
 }

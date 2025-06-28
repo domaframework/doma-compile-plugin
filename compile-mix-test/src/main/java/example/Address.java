@@ -5,7 +5,6 @@ import org.seasar.doma.Id;
 
 @Entity
 class Address {
-    @Id
-    public Integer id;
-    public String name;
+  @Id public Integer id;
+  public String name;
 }
