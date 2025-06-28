@@ -1,2 +1,5 @@
 rootProject.name = "doma-compile-plugin"
-include("compile")
+
+pluginManagement {
+    includeBuild("compile")
+}

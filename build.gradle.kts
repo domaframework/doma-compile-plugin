@@ -1,21 +1,38 @@
 plugins {
     java
-    id("net.researchgate.release") version "3.1.0"
+    id("org.domaframework.doma.compile")
+    id("org.jetbrains.kotlin.jvm") version "2.2.0"
+    id("org.jetbrains.kotlin.kapt") version "2.2.0"
 }
 
-configure<net.researchgate.release.ReleaseExtension> {
-    newVersionCommitMessage.set("[Gradle Release Plugin] - [skip ci] new version commit: ")
-    tagTemplate.set("v\$version")
-    git {
-        requireBranch.set("master")
+val domaVersion = "3.9.1"
+
+kapt {
+    includeCompileClasspath = false
+}
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of( 17))
+}
+
+tasks {
+    test {
+        useJUnitPlatform()
     }
 }
 
-allprojects {
-    apply(plugin = "java")
-    tasks {
-        test {
-            useJUnitPlatform()
-        }
-    }
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    kapt("org.seasar.doma:doma-processor:$domaVersion")
+    implementation("org.seasar.doma:doma-core:$domaVersion")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib")
+    // Use JUnit BOM for version management
+    testImplementation(platform("org.junit:junit-bom:5.13.2"))
+    testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
