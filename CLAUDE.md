@@ -44,9 +44,10 @@ The Doma Compile Plugin is a Gradle plugin that allows annotation processors to 
 
 ### Project Structure
 - **compile/**: Main plugin implementation
-  - `CompilePlugin.java`: Entry point that applies configurations
-  - `ConfigureJava.java`: Configures Java compilation to include resource directories in sourcepath
-  - `ConfigureKotlin.groovy`: Configures Kotlin/KAPT to include resource directories
+  - `CompilePlugin.java`: Entry point that delegates to CompileConfigurator
+  - `CompileConfigurator.java`: Central configuration manager that coordinates Java and Kotlin configuration
+  - `JavaCompileConfigurator.java`: Configures Java compilation tasks to include resource directories in sourcepath
+  - `KotlinCompileConfigurator.groovy`: Configures Kotlin/KAPT tasks to include resource directories
   
 - **Test Projects**: Three separate Gradle projects for testing different scenarios
   - `compile-java-test/`: Tests plugin with pure Java
