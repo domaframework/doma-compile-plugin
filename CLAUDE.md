@@ -10,14 +10,19 @@ The Doma Compile Plugin is a Gradle plugin that allows annotation processors to 
 
 ### Building the Plugin
 ```bash
-cd compile && ./gradlew build && cd ..
+./gradlew build
 ```
 
 ### Running Tests
-The plugin has three test suites:
 ```bash
-# Build the all test projects
-./gradlew build
+# Run all tests
+./gradlew test
+
+# Run specific module tests
+./gradlew :compile:test
+./gradlew :compile-java-test:test
+./gradlew :compile-kotlin-test:test
+./gradlew :compile-mix-test:test
 ```
 
 ### Code Formatting
@@ -26,19 +31,13 @@ The plugin has three test suites:
 ./gradlew spotlessApply
 ```
 
-### Running a Single Test
-```bash
-# With any test project (compile-java-test, compile-kotlin-test, or compile-mix-test)
-./gradlew :compile-java-test:test --tests "example.GenerationTest"
-```
-
 ### Publishing (for maintainers)
 ```bash
 # Release a new version (from master branch only)
-cd compile && ./gradlew release  && cd ..
+./gradlew release
 
 # Publish to Gradle Plugin Portal (handled by CI for non-SNAPSHOT versions)
-cd compile && ./gradlew publishPlugins -Pgradle.publish.key=<key> -Pgradle.publish.secret=<secret> && cd..
+./gradlew :compile:publishPlugins -Pgradle.publish.key=<key> -Pgradle.publish.secret=<secret>
 ```
 
 ## Architecture
