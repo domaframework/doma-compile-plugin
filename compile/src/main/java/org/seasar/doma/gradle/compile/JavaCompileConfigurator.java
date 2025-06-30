@@ -17,16 +17,20 @@ class JavaCompileConfigurator {
   }
 
   void configure(SourceSet sourceSet) {
-    var resourceDirs = sourceSet.getResources().getSrcDirs();
     var compileTaskName = sourceSet.getCompileJavaTaskName();
-
     project
         .getTasks()
         .named(compileTaskName, JavaCompile.class)
-        .configure(
-            javaCompile -> {
-              javaCompile.getOptions().setSourcepath(project.files(resourceDirs));
-              javaCompile.getOptions().getCompilerArgs().add(PARAMETERS_COMPILER_ARG);
-            });
+        .configure(javaCompile -> configureJavaCompile(sourceSet, javaCompile));
+  }
+
+  private void configureJavaCompile(SourceSet sourceSet, JavaCompile javaCompile) {
+    javaCompile.doFirst(
+        __ -> {
+          var resourceDirs = sourceSet.getResources().getSrcDirs();
+          var options = javaCompile.getOptions();
+          options.setSourcepath(project.files(resourceDirs));
+          options.getCompilerArgs().add(PARAMETERS_COMPILER_ARG);
+        });
   }
 }

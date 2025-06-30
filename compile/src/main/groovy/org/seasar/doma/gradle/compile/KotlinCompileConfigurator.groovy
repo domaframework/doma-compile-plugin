@@ -29,7 +29,7 @@ class KotlinCompileConfigurator {
         def kapt = project.extensions.getByName(KAPT_EXTENSION_NAME)
         def resourceDirs = sourceSet.resources.srcDirs
         def sourcePath = resourceDirs.join(File.pathSeparator)
-        
+
         kapt.javacOptions {
             option SOURCE_PATH_OPTION, sourcePath
             option PARAMETERS_OPTION, ''

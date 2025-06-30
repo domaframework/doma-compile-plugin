@@ -1,0 +1,1 @@
+select * from department where id = /*id*/0
