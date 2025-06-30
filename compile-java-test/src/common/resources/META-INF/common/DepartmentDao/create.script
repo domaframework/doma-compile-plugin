@@ -1,0 +1,4 @@
+create table department(
+    id integer not null primary key,
+    name varchar(20) not null,
+);

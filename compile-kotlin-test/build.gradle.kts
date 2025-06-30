@@ -30,3 +30,12 @@ dependencies {
     testRuntimeOnly(libs.junit.jupiter.engine)
     testRuntimeOnly(libs.junit.platform.launcher)
 }
+
+kotlin {
+    sourceSets {
+        main {
+            kotlin.srcDir("src/common/kotlin")
+            resources.srcDir("src/common/resources")
+        }
+    }
+}

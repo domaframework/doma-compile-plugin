@@ -23,3 +23,10 @@ dependencies {
     testRuntimeOnly(libs.junit.jupiter.engine)
     testRuntimeOnly(libs.junit.platform.launcher)
 }
+
+sourceSets {
+    main {
+        java.srcDir("src/common/java")
+        resources.srcDir("src/common/resources")
+    }
+}

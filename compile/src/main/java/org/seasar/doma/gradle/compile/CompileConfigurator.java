@@ -19,14 +19,19 @@ class CompileConfigurator {
   }
 
   void configure() {
+    // Configure immediately for Java
     var javaExtension = project.getExtensions().getByType(JavaPluginExtension.class);
     var mainSourceSet = javaExtension.getSourceSets().getByName(SourceSet.MAIN_SOURCE_SET_NAME);
+    javaConfigurator.configure(mainSourceSet);
 
-    configureSourceSet(mainSourceSet);
-  }
-
-  private void configureSourceSet(SourceSet sourceSet) {
-    javaConfigurator.configure(sourceSet);
-    kotlinConfigurator.configure(sourceSet);
+    // Defer Kotlin configuration until after project evaluation
+    project.afterEvaluate(
+        evaluatedProject -> {
+          var evaluatedJavaExtension =
+              evaluatedProject.getExtensions().getByType(JavaPluginExtension.class);
+          var evaluatedMainSourceSet =
+              evaluatedJavaExtension.getSourceSets().getByName(SourceSet.MAIN_SOURCE_SET_NAME);
+          kotlinConfigurator.configure(evaluatedMainSourceSet);
+        });
   }
 }
