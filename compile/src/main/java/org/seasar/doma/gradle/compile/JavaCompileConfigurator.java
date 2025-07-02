@@ -29,7 +29,11 @@ class JavaCompileConfigurator {
         __ -> {
           var resourceDirs = sourceSet.getResources().getSrcDirs();
           var options = javaCompile.getOptions();
-          options.setSourcepath(project.files(resourceDirs));
+          var newSourcepath = project.files(resourceDirs);
+          var currentSourcepath = options.getSourcepath();
+          var sourcepath =
+              currentSourcepath == null ? newSourcepath : currentSourcepath.plus(newSourcepath);
+          options.setSourcepath(sourcepath);
           options.getCompilerArgs().add(PARAMETERS_COMPILER_ARG);
         });
   }
