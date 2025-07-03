@@ -1,9 +1,14 @@
 rootProject.name = "doma-compile-plugin"
 
-pluginManagement {
-    includeBuild("compile")
-}
+val releaseVersion = settings.startParameter.projectProperties["release.releaseVersion"]
 
-include("compile-java-test")
-include("compile-kotlin-test")
-include("compile-mix-test")
+if (releaseVersion != null) {
+    include("compile")
+} else {
+    pluginManagement {
+        includeBuild("compile")
+    }
+    include("compile-java-test")
+    include("compile-kotlin-test")
+    include("compile-mix-test")
+}
