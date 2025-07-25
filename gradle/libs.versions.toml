@@ -1,5 +1,5 @@
 [versions]
-doma = "3.10.0"
+doma = "3.11.0"
 junit-bom = "5.13.4"
 kotlin = "2.2.0"
 gradle-plugin-publish = "1.3.1"
