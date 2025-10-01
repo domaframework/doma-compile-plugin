@@ -25,14 +25,13 @@ class JavaCompileConfigurator {
   }
 
   private void configureJavaCompile(SourceSet sourceSet, JavaCompile javaCompile) {
+    var resourceDirs = project.files(sourceSet.getResources().getSrcDirs());
     javaCompile.doFirst(
         __ -> {
-          var resourceDirs = sourceSet.getResources().getSrcDirs();
           var options = javaCompile.getOptions();
-          var newSourcepath = project.files(resourceDirs);
           var currentSourcepath = options.getSourcepath();
           var sourcepath =
-              currentSourcepath == null ? newSourcepath : currentSourcepath.plus(newSourcepath);
+              currentSourcepath == null ? resourceDirs : currentSourcepath.plus(resourceDirs);
           options.setSourcepath(sourcepath);
           options.getCompilerArgs().add(PARAMETERS_COMPILER_ARG);
         });
