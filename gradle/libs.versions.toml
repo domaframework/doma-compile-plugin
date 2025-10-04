@@ -1,6 +1,6 @@
 [versions]
 doma = "3.11.0"
-junit-bom = "5.14.0"
+junit-bom = "6.0.0"
 kotlin = "2.2.20"
 gradle-plugin-publish = "2.0.0"
 spotless = "8.0.0"
