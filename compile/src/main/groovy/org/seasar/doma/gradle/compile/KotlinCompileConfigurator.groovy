@@ -1,6 +1,7 @@
 package org.seasar.doma.gradle.compile
 
 import org.gradle.api.Project
+import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.SourceSet
 
 /**
@@ -12,6 +13,11 @@ class KotlinCompileConfigurator {
     private static final String KAPT_EXTENSION_NAME = 'kapt'
     private static final String SOURCE_PATH_OPTION = '--source-path'
     private static final String PARAMETERS_OPTION = '-parameters'
+
+    /** Resources read by the Doma annotation processor. */
+    private static final List<String> DOMA_RESOURCES = [
+            'META-INF/**/*.sql', 'META-INF/**/*.script', 'doma.compile.config'
+    ]
 
     private final Project project
 
@@ -37,6 +43,18 @@ class KotlinCompileConfigurator {
         kapt.javacOptions {
             option SOURCE_PATH_OPTION, sourcepath
             option PARAMETERS_OPTION, ''
+        }
+
+        // Matched by name, because the kapt task type differs across Kotlin plugin versions
+        def kaptTaskName = sourceSet.getTaskName('kapt', 'Kotlin')
+        def domaResources = project.files(resourceDirs).asFileTree.matching {
+            include DOMA_RESOURCES
+        }
+        project.tasks.matching { it.name == kaptTaskName }.configureEach { task ->
+            // Without this, editing only a SQL file leaves the task up-to-date and skips its validation
+            task.inputs.files(domaResources)
+                    .withPropertyName('domaResources')
+                    .withPathSensitivity(PathSensitivity.RELATIVE)
         }
     }
 }
