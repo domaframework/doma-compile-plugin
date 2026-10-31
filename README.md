@@ -7,7 +7,7 @@ The plugin supports both Java and Kotlin.
 
 [![Java CI with Gradle](https://github.com/domaframework/doma-compile-plugin/workflows/Java%20CI%20with%20Gradle/badge.svg)](https://github.com/domaframework/doma-compile-plugin/actions?query=workflow%3A%22Java+CI+with+Gradle%22)
 [![Project Chat](https://img.shields.io/badge/zulip-join_chat-green.svg)](https://domaframework.zulipchat.com)
-[![Twitter](https://img.shields.io/badge/twitter-@domaframework-blue.svg?style=flat)](https://twitter.com/domaframework)
+[![X](https://img.shields.io/badge/X-@domaframework-black.svg?style=flat&logo=x)](https://x.com/domaframework)
 
 How to Use
 ----------
@@ -36,6 +36,10 @@ kapt {
     }
 }
 ```
+
+In addition, the plugin declares Doma resources (`META-INF/**/*.sql`, `META-INF/**/*.script`, and `doma.compile.config`)
+as inputs of the `compileJava` and `kaptKotlin` tasks.
+As a result, editing only a SQL file reruns annotation processing, so the SQL is validated again.
 
 Example build.gradle.kts
 ------------------------
