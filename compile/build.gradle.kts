@@ -56,6 +56,7 @@ tasks {
     test {
         useJUnitPlatform()
         systemProperty("domaVersion", libs.versions.doma.get())
+        systemProperty("kotlinVersion", libs.versions.kotlin.get())
     }
 
     javadoc {
