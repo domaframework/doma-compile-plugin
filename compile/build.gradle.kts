@@ -55,6 +55,7 @@ dependencies {
 tasks {
     test {
         useJUnitPlatform()
+        systemProperty("domaVersion", libs.versions.doma.get())
     }
 
     javadoc {
