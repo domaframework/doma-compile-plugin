@@ -31,7 +31,8 @@ class JavaCompileConfigurator {
   }
 
   private void configureJavaCompile(SourceSet sourceSet, JavaCompile javaCompile) {
-    var resourceDirs = project.files(sourceSet.getResources().getSrcDirs());
+    // Lazy, so resource dirs added after this task is realized are still picked up
+    var resourceDirs = project.files(sourceSet.getResources().getSourceDirectories());
     // Without this, editing only a SQL file leaves the task up-to-date and skips its validation
     javaCompile
         .getInputs()

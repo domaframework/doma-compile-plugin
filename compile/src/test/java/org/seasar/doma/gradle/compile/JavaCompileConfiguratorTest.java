@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import org.gradle.testkit.runner.BuildResult;
 import org.gradle.testkit.runner.GradleRunner;
 import org.gradle.testkit.runner.TaskOutcome;
@@ -82,6 +83,29 @@ class JavaCompileConfiguratorTest {
     assertEquals(TaskOutcome.UP_TO_DATE, compileJava().task(":compileJava").getOutcome());
   }
 
+  @Test
+  void resourceDirAddedAfterTaskRealizationIsUsed() throws IOException {
+    Files.move(
+        projectDir.resolve(SQL_PATH),
+        Files.createDirectories(projectDir.resolve("src/main/sql/META-INF/example/EmployeeDao"))
+            .resolve("selectById.sql"));
+    // Eagerly realize compileJava before the resource dir is added
+    append(
+        "build.gradle.kts",
+        """
+
+        tasks.withType<JavaCompile> {
+            options.encoding = "UTF-8"
+        }
+
+        sourceSets.main {
+            resources.srcDir("src/main/sql")
+        }
+        """);
+
+    assertEquals(TaskOutcome.SUCCESS, compileJava().task(":compileJava").getOutcome());
+  }
+
   private BuildResult compileJava() {
     return runner().build();
   }
@@ -91,6 +115,10 @@ class JavaCompileConfiguratorTest {
         .withProjectDir(projectDir.toFile())
         .withPluginClasspath()
         .withArguments("compileJava", "--stacktrace");
+  }
+
+  private void append(String path, String content) throws IOException {
+    Files.writeString(projectDir.resolve(path), content, StandardOpenOption.APPEND);
   }
 
   private void write(String path, String content) throws IOException {
