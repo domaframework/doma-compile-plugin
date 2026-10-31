@@ -36,7 +36,8 @@ The Doma Compile Plugin is a Gradle plugin that allows annotation processors to 
 # Release a new version (from master branch only)
 ./gradlew release
 
-# Publish to Gradle Plugin Portal (handled by CI for non-SNAPSHOT versions)
+# Publish to Gradle Plugin Portal (handled by the Release workflow via publish.yml;
+# rerun a failed publish with the Publish workflow and a tag such as v4.0.4)
 ./gradlew :compile:publishPlugins -Pgradle.publish.key=<key> -Pgradle.publish.secret=<secret>
 ```
 
@@ -94,7 +95,8 @@ GitHub Actions workflow (`.github/workflows/ci.yml`):
 1. Triggers on push/PR to master branch
 2. Uses JDK 21 on Ubuntu
 3. Runs `./gradlew build :compile:check`, which builds and tests the plugin and all three test projects
-4. Auto-publishes non-SNAPSHOT versions to Gradle Plugin Portal
+
+Releases run through `.github/workflows/release.yml` (manual `workflow_dispatch`). It runs `./gradlew release`, then calls `.github/workflows/publish.yml` to publish the new tag to the Gradle Plugin Portal. Publishing can't rely on the release push starting CI, because pushes made with `GITHUB_TOKEN` don't trigger other workflows. `publish.yml` can also be run by hand with a `tag` input.
 
 ### Plugin Configuration
 The plugin is published as `org.domaframework.doma.compile` and can be applied:
